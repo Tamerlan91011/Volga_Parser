@@ -22,17 +22,18 @@
 - Количество комментариев новости (если есть)
 
 ## **Что нужно установить:** ##
-- Python последней версии
-<br>
+- Python последней версии:
+
 `sudo apt-get install python3`
 - Python пакеты **requests** и **beautifulsoup** для работы с HTTP запросами на сайтах, и для обработки их контента:
-<br>
+
 `pip install requests`
-<br>
+
 `pip install beautifulsoup4`
+
 - MongoDB - NoSQL Система управления базами данных (СУБД)
-<br>
+
 [Инструкция по установке](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/)
 - Flask - фреймворк для создания веб-приложений на Python. Его будет достаточно для базового отображения результатов парсинга:
-<br>
+
 `pip install Flask`
