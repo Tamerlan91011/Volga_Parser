@@ -15,6 +15,17 @@ def get_html(url, params=None):
     return r
 
 
+# def get_pages_count(html):
+#     soup = BeautifulSoup(html, 'html.parser')
+#
+#     pagination = soup.find('div', class_='pagination').find_all('a', class_='')
+#     pages = []
+#     for page in pagination:
+#         pages.append(page.get_text())
+#
+#     return int(pages[-1])
+
+
 def get_content(html):
     soup = BeautifulSoup(html, 'html.parser')
     items = soup.find_all('div', class_='col-xl-8 col-lg-8 col-md-8 col-sm-12')
@@ -32,12 +43,19 @@ def get_content(html):
     return articles
 
 
-def parse():
+def parse(pages_count):
     html = get_html(URL)
     if html.status_code == 200:
-        articles = get_content(html.text)
+        news = []
+        # pages_count = get_pages_count(html.text)
+        for page in range(1, pages_count+1):
+            print(f'Парсим страницу {page} из {pages_count}...')
+            html = get_html(URL, params={'PAGEN_1': page})
+            news.extend(get_content(html.text))
+        print(f'Получено {len(news)} новостей')
+        # print(news)
     else:
         print('ERROR!')
 
 
-parse()
+parse(20)
