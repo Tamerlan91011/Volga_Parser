@@ -1,6 +1,7 @@
 ## Здесь будет описываться парсер
 import requests
 from bs4 import BeautifulSoup
+import json
 
 URL = 'https://riac34.ru/news/'
 
@@ -13,17 +14,6 @@ HOST = 'https://riac34.ru'
 def get_html(url, params=None):
     r = requests.get(url, headers=HEADERS, params=params)
     return r
-
-
-# def get_pages_count(html):
-#     soup = BeautifulSoup(html, 'html.parser')
-#
-#     pagination = soup.find('div', class_='pagination').find_all('a', class_='')
-#     pages = []
-#     for page in pagination:
-#         pages.append(page.get_text())
-#
-#     return int(pages[-1])
 
 
 def get_content(html):
@@ -45,10 +35,10 @@ def get_content(html):
 
 def parse(pages_count):
     html = get_html(URL)
+    news = []
     if html.status_code == 200:
-        news = []
         # pages_count = get_pages_count(html.text)
-        for page in range(1, pages_count+1):
+        for page in range(1, pages_count + 1):
             print(f'Парсим страницу {page} из {pages_count}...')
             html = get_html(URL, params={'PAGEN_1': page})
             news.extend(get_content(html.text))
@@ -56,6 +46,6 @@ def parse(pages_count):
         # print(news)
     else:
         print('ERROR!')
+    return news
 
 
-parse(20)
