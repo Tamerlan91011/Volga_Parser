@@ -11,7 +11,7 @@ collection = db['news']
 
 # Создание списка новостей
 articles = []
-for doc in collection.find():
+for doc in collection.find().sort('link', -1):
     articles.append(doc)
 
 # Отображение списка в браузере
