@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Новости РИАЦ</title>
+    <link rel="stylesheet" type="text/css" href="static/style.css">
+</head>
+<body>
+
+<header class="header">
+    <h1>Список полученных новостей с сайта РИАЦ</h1>
+</header>
+
+<main>
+    <h2>Новости:</h2>
+    <div class="articles">
+
+        {% for doc in articles %}
+        <div class="article">
+            <a href={{ doc.link }} class="article-title"> {{ doc.title }}</a>
+
+            <p>{{ doc.desc }} </p>
+            <p>{{doc.tag}}</p>
+            <p>
+                <time>{{ doc.date }}</time>
+            </p>
+        </div>
+        {% endfor %}
+    </div>
+</main>
+
+</body>
+</html>

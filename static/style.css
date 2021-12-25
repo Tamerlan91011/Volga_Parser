@@ -1,0 +1,17 @@
+body {
+  width: 65%;
+  margin: auto;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 15px;
+}
+
+.article {
+  margin: 20px;
+  padding: 1rem;
+  border: 1px solid rgba(30,30,35,.15);
+  border-radius: 4px;
+}
+
+.article-title {
+  font-size: 1.1rem;
+}

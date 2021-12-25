@@ -1,13 +1,9 @@
-## Здесь будет описываться парсер
 import requests
 from bs4 import BeautifulSoup
-import json
 
 URL = 'https://riac34.ru/news/'
-
 HEADERS = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:95.0) Gecko/20100101 Firefox/95.0',
            'accept': '*/*'}
-
 HOST = 'https://riac34.ru'
 
 
@@ -37,13 +33,11 @@ def parse(pages_count):
     html = get_html(URL)
     news = []
     if html.status_code == 200:
-        # pages_count = get_pages_count(html.text)
         for page in range(1, pages_count + 1):
             print(f'Парсим страницу {page} из {pages_count}...')
             html = get_html(URL, params={'PAGEN_1': page})
             news.extend(get_content(html.text))
         print(f'Получено {len(news)} новостей')
-        # print(news)
     else:
         print('ERROR!')
     return news
