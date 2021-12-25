@@ -17,14 +17,20 @@ def get_content(html):
     items = soup.find_all('div', class_='col-xl-8 col-lg-8 col-md-8 col-sm-12')
 
     articles = []
-
     for item in items:
+        link_to_text = HOST + item.find('a', class_='caption').get('href')
+
+        article_html = get_html(link_to_text).text
+        soup_text = BeautifulSoup(article_html, 'html.parser')
+        text = soup_text.find('div', class_='full-text').get_text()
+
         articles.append({
             'title': item.find('a', class_='caption').get_text(),
             'link': HOST + item.find('a', class_='caption').get('href'),
             'date': item.find('div', class_='new-attr').find('span', class_='date').get_text(),
             'desc': item.find('div', class_='desc').get_text(strip=True),
-            'tag': item.find('div', class_='new-attr').find('a', class_='cat').get_text()
+            'tag': item.find('div', class_='new-attr').find('a', class_='cat').get_text(),
+            'text': text
         })
     return articles
 
